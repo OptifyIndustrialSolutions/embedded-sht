@@ -140,7 +140,7 @@ int16_t shtc1_read_serial(uint32_t* serial) {
         return ret;
 
     *serial = ((uint32_t)serial_words[0] << 16) | serial_words[1];
-    return ret;
+    return 0;
 }
 
 const char* shtc1_get_driver_version(void) {
