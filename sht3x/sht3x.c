@@ -150,13 +150,12 @@ void sht3x_set_power_mode(sht3x_measurement_mode_t mode) {
 
 int16_t sht3x_read_serial(sht3x_i2c_addr_t addr, uint32_t* serial) {
     int16_t ret;
-    uint8_t serial_bytes[4];
 
     ret = sensirion_i2c_write_cmd(addr, SHT3X_CMD_READ_SERIAL_ID);
     sensirion_sleep_usec(SHT3X_CMD_DURATION_USEC);
 
     if (ret == STATUS_OK) {
-
+        uint8_t serial_bytes[4];
         ret = sensirion_i2c_read_words_as_bytes(
             addr, serial_bytes, SENSIRION_NUM_WORDS(serial_bytes));
         *serial = sensirion_bytes_to_uint32_t(serial_bytes);
